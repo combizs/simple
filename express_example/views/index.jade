@@ -2,8 +2,10 @@ extends layout
 
 block content
   header
-    input.url(type='text', placeholder='Enter URL Here')
+    input.url(type='text', placeholder='Enter URL Here', value='http://news.yahoo.com/real-risks-amusement-park-not-rollercoasters-study-finds-033021487.html')
     button.submit Send
-    div#targetdiv adasd
-  aside
-    span asdasdasd
+    div#targetdiv
+    div#comment
+      textarea#writeComment(placeholder='Write Comments Here')
+      button.comment Post Comment
+  aside.comments

@@ -9,7 +9,7 @@
     "express": "3.2.5",
     "jade": "*",
     "stylus": "*",
-    "redis" : "*",
+    "connect-redis" : "*",
     "mongodb": ">= 0.9.6-7"
   }
 }
