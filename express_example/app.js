@@ -6,6 +6,23 @@
 var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path');
 
 var fs = require('fs');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/random');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("opening connection");
+});
+
+var Cat = require('./models/schemas.js').Cat;
+
+Cat.find({name: "Zildjian"}, function(err, docs){
+  // conditional statement, if docs.length...
+  if(err) console.log(err);
+  if(docs.length) console.log("got results");
+});
+
 // var RedisStore = require('connect-redis')(express);
 var app = express();
 
@@ -22,12 +39,12 @@ app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-var Firebase = require('firebase');
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+
 
 app.get('/', routes.index);
 app.get('/users', user.list);

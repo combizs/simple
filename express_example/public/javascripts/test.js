@@ -1,6 +1,18 @@
 $(document).ready(function (){
-var myRootRef = new Firebase('https://combizs.firebaseIO.com/');
-var myZabRef = new Firebase('https://zabonit-comments.firebaseIO.com/comments');
+var url = 'comments';
+// var myRootRef = new Firebase('https://combizs.firebaseIO.com/');
+// var myZabRef = new Firebase('https://zabonit-comments.firebaseIO.com/'+url);
+
+// String.prototype.hashCode = function(){
+//   var hash = 0;
+//   if (this.length === 0) return hash;
+//   for (i = 0; i < this.length; i++) {
+//     char = this.charCodeAt(i);
+//     hash = ((hash<<5)-hash)+char;
+//     hash = hash & hash; // Convert to 32bit integer
+//   }
+//   return hash;
+// };
 
   var fetchUrl = function(domain) {
     // var re = new RegExp("^[a-zA-Z0-9._-]+\\\\[a-zA-Z0-9.-]$");
@@ -12,8 +24,9 @@ var myZabRef = new Firebase('https://zabonit-comments.firebaseIO.com/comments');
         type: 'GET',
         dataType: 'jsonp',
         success: function(data) {
-          myRootRef.set({url: $('input.url').val(), name: 'biz'});
-          $('input.url').val("");
+          // url = 'articles';
+          // myRootRef = new Firebase('https://zabonit-comments.firebaseIO.com/'+url);
+          // myRootRef.push({url: $('input.url').val(), content: data.content});
           $('#targetdiv').append(data.content);
         },
         error: function() {
@@ -45,7 +58,12 @@ var myZabRef = new Firebase('https://zabonit-comments.firebaseIO.com/comments');
 
   var writeComment = function(comment) {
     if(comment){
-      myZabRef.push({comment: comment});
+      urlID = $('input.url').val().hashCode();
+      url = 'comments';
+      // myRootRef = new Firebase('https://zabonit-comments.firebaseIO.com/'+url);
+      // myRootRef.push({url: $('input.url').val(), content: ''});
+      // myRootRef.push({comment: comment, urlID: urlID, author: 'anonymous'});
+      $('input#writeComment').val('');
     }
     else {
       console.error('add css to highlight input box and add message');
@@ -57,24 +75,23 @@ var myZabRef = new Firebase('https://zabonit-comments.firebaseIO.com/comments');
     $('#writeComment').val('');
   });
 
-  myZabRef.on('child_added', function(snapshot) {
-    var message = snapshot.val();
-    displayZabMessage(message.comment);
-  });
+  // myZabRef.on('child_added', function(snapshot) {
+  //   var message = snapshot.val();
+  //   displayZabMessage(message.comment, message.author);
+  // });
 
-  var displayZabMessage = function (comment) {
-    // $('aside.comments').val('');
-    $('<div/>').text(comment).prepend($('<em/>').text("comment: ")).appendTo($('aside.comments'));
+  var displayZabMessage = function (comment, author) {
+    $('<div/>').text(comment).prepend($('<em/>').text(author+": ")).appendTo($('aside.comments'));
     $('aside.comments')[0].scrollTop = $('aside.comments')[0].scrollHeight;
   };
 
-  // $('input.url').on('keyup', function(event) {
-  //   var key = event.keyCode;
+  $('input#writeComment').on('keyup', function(event) {
+    var key = event.keyCode;
 
-  //   if (key === 13) {
-  //     writeComment($('input#writeComment').val());
-  //   }
-  //   return false;
-  // });
+    if (key === 13) {
+      writeComment($('input#writeComment').val());
+    }
+    return false;
+  });
 
 });

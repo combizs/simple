@@ -23,9 +23,6 @@ aside {
   border: 1px solid #808080;
   overflow-y: auto;
 }
-#writeComment {
-  width: 50%;
-}
 .error {
   border-color: #f00;
 }
@@ -33,13 +30,13 @@ input,
 button {
   margin: 0;
 }
-input.url {
+input {
   width: 69%;
   padding: 2%;
   border: 0;
   background: #d3d3d3;
 }
-button.submit {
+button {
   width: 26%;
   padding: 2%;
 }
