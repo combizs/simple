@@ -1,8 +1,7 @@
-
-/*
- * GET users listing.
- */
+var User = require('../models/user.js');
 
 exports.list = function(req, res){
-  res.send("respond with a resource");
+  User.find(function(err, users) {
+    res.send(users);
+  });
 };

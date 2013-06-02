@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path');
+var express = require('express'), routes = require('./routes'), post = require('./routes/post'), user = require('./routes/user'), url = require('./routes/url'), http = require('http'), path = require('path');
 
 var fs = require('fs');
 var mongoose = require('mongoose');
@@ -13,14 +13,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
   console.log("opening connection");
-});
-
-var Cat = require('./models/schemas.js').Cat;
-
-Cat.find({name: "Zildjian"}, function(err, docs){
-  // conditional statement, if docs.length...
-  if(err) console.log(err);
-  if(docs.length) console.log("got results");
 });
 
 // var RedisStore = require('connect-redis')(express);
@@ -44,11 +36,18 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
-
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/posts', post.create);
+app.get('/url', url.find);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+// send url to function
+// sterilize string
+// check db for hash value
+//   hash value with function if doesnt exist.
+//     send data to api to retrieve content.
+//   return content if exists
