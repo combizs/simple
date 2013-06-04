@@ -17,11 +17,14 @@ db.once('open', function callback () {
 
 var Cat = require('./models/schemas.js').Cat;
 
-Cat.find({name: "Zildjian"}, function(err, docs){
-  // conditional statement, if docs.length...
-  if(err) console.log(err);
-  if(docs.length) console.log("got results");
-});
+
+// Cat.find({name: "Zildjian"}, function(err, docs){
+// 	console.log('test');
+
+//   // conditional statement, if docs.length...
+//   if(err) console.log(err);
+//   if(docs.length) console.log("got results");
+// });
 
 // var RedisStore = require('connect-redis')(express);
 var app = express();
