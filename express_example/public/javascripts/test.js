@@ -4,12 +4,14 @@ $(document).ready(function (){
   var fetchUrl = function(domain) {
     // var re = new RegExp("^[a-zA-Z0-9._-]+\\\\[a-zA-Z0-9.-]$");
     if(domain){
-      $('input.url').attr('disabled', 'disable');
-      $('button.submit').attr('disabled', 'disable');
       $.ajax({
         url: 'http://localhost:3000/url/?url=' + $('input.url').val(),
         type: 'GET',
         dataType: 'json',
+        beforeSend: function() {
+          $('input.url').attr('disabled', 'disable');
+          $('button.submit').attr('disabled', 'disable');
+        },
         success: function(data) {
           $('#targetdiv').text(data.urlHash);
         },
@@ -55,21 +57,21 @@ $(document).ready(function (){
     return false;
   });
 
-  // var writeComment = function(comment) {
-  //   if(comment){
-  //     urlID = $('input.url').val().hashCode();
-  //     url = 'comments';
-  //     $('input#writeComment').val('');
-  //   }
-  //   else {
-  //     console.error('add css to highlight input box and add message');
-  //   }
-  // };
+  var writeComment = function(comment) {
+    if(comment){
+      urlID = $('input.url').val().hashCode();
+      url = 'comments';
+      $('input#writeComment').val('');
+    }
+    else {
+      console.error('add css to highlight input box and add message');
+    }
+  };
 
-  // $('button.comment').on('click', function() {
-  //   writeComment($('#writeComment').val());
-  //   $('#writeComment').val('');
-  // });
+  $('button.comment').on('click', function() {
+    writeComment($('#writeComment').val());
+    $('#writeComment').val('');
+  });
 
   // var displayZabMessage = function (comment, author) {
   //   $('<div/>').text(comment).prepend($('<em/>').text(author+": ")).appendTo($('aside.comments'));
