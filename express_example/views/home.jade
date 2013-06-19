@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  header
+    a(href="/logout") Logout
+
+    if(!user)
+      h2 Not authenticated 
+    else
+      h2 Authenticated
+      //- p=user.id
+    div
+      input.url(type='text', placeholder='Enter URL here to print out article content below')
+      button.submit Send
+      div#targetdiv
+      //- div#comment
+      //-   input#writeComment(placeholder='Write Comments Here')
+      //-   button.comment Post Comment
+  aside.comments
