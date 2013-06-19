@@ -1,7 +1,6 @@
-
 var mysql = require("mysql");
 var Sequelize = require("sequelize");
-var sequelize = new Sequelize('bizbase', 'root', '~Silent83');
+var sequelize = new Sequelize('bizbase', 'root', '~pass');
 
 var djb2Code = function(str){
   var hash = 5381;
