@@ -10,6 +10,6 @@
     "jade": "*",
     "stylus": "*",
     "connect": "*",
-    "mongoose": "~3.6.11"
+    "sequelize": "*"
   }
 }

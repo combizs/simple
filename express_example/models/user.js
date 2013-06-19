@@ -1,8 +1,10 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var userSchema = new Schema({
-    name:  String
+var Sequelize = require('sequelize');
+var User = sequelize.define('User', { openid: Sequelize.STRING, firstname: Sequelize.STRING, lastname: Sequelize.STRING }, {
+instanceMethods: {
+  getFullname: function() {
+    return [this.firstname, this.lastname].join(' ')
+  }
+}
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = sequelize.model('User', userSchema);

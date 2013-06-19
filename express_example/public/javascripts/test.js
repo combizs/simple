@@ -2,33 +2,17 @@ $(document).ready(function (){
   var url = 'comments';
 
   var fetchUrl = function(domain) {
-    // var re = new RegExp("^[a-zA-Z0-9._-]+\\\\[a-zA-Z0-9.-]$");
     if(domain){
-      $.ajax({
-        url: 'http://localhost:3000/url/?url=' + $('input.url').val(),
-        type: 'GET',
-        dataType: 'json',
-        beforeSend: function() {
-          $('input.url').attr('disabled', 'disable');
-          $('button.submit').attr('disabled', 'disable');
-        },
-        success: function(data) {
-          $('#targetdiv').text(data.urlHash);
-        },
-        error: function() {
-          console.error('error');
-        },
-        complete: function() {
-          $('input.url').removeAttr('disabled');
-          $('button.submit').removeAttr('disabled');
-        }
-      });
       // $.ajax({
-      //   url: 'https://www.readability.com/api/content/v1/parser?url=' + $('input.url').val()+'&token=be4591d022b60dc6ad175516afb712a7797f3836',
+      //   url: 'http://localhost:3000/url/?url=' + $('input.url').val(),
       //   type: 'GET',
-      //   dataType: 'jsonp',
+      //   dataType: 'json',
+      //   beforeSend: function() {
+      //     $('input.url').attr('disabled', 'disable');
+      //     $('button.submit').attr('disabled', 'disable');
+      //   },
       //   success: function(data) {
-      //     $('#targetdiv').append(data.content);
+      //     $('#targetdiv').text(data.urlHash);
       //   },
       //   error: function() {
       //     console.error('error');
@@ -38,6 +22,21 @@ $(document).ready(function (){
       //     $('button.submit').removeAttr('disabled');
       //   }
       // });
+      $.ajax({
+        url: 'https://www.readability.com/api/content/v1/parser?url=' + $('input.url').val()+'&token=be4591d022b60dc6ad175516afb712a7797f3836',
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function(data) {
+          $('#targetdiv').append(data.content);
+        },
+        error: function() {
+          console.error('error');
+        },
+        complete: function() {
+          $('input.url').removeAttr('disabled');
+          $('button.submit').removeAttr('disabled');
+        }
+      });
     }
     else {
       // $('input.url').addClass('error');
