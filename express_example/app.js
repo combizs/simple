@@ -1,4 +1,3 @@
-
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
@@ -14,7 +13,7 @@ var Sequelize = require("sequelize");
 var passport = require('passport')
   , GoogleStrategy = require('passport-google').Strategy;
 
-var sequelize = new Sequelize('bizbase', 'root', '~Silent83');
+var sequelize = new Sequelize('bizbase', 'root', '~pass');
 
 var User = sequelize.define('User', { openid: Sequelize.STRING, firstname: Sequelize.STRING, lastname: Sequelize.STRING }, {
   instanceMethods: {
