@@ -4,7 +4,7 @@ module.exports = {
   connection: mysql.createConnection({
   database     : 'bizbase',
   user     : 'root',
-  password : '~Silent83',
+  password : '~pass',
   host: '127.0.0.1'
   })
 };
